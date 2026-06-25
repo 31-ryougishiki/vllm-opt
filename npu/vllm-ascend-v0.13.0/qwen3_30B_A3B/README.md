@@ -1,18 +1,22 @@
 #### 1. vllm-ascend-v0.13.0 qwen3-30B-A3B优化镜像使用
 
-##### 使用场景
-硬件: 910B4
-架构: x86
-os: linux
-优化场景: prefill长度相对decode长度较短(如prefill2048/decode512)
+##### 设备配套
+| 配置项 | 值 |
+| :--- | :--- |
+| **推理卡** | 910B4 |
+| **CANN 版本** | 8.5.0 |
+| **架构** | x86 |
+| **OS** | Linux |
 
-##### 参考测试结果
-Throughput
+##### 测试配置
+| 参数 | 值 |
+| :--- | :--- |
+| 数据集 | GSM8k |
+| num_prompts | 256 |
+| batch_size | 128 |
+| req_rate | 8 |
+###### Throughput
 ![图片加载失败](./pic/Total_Token_Throughput.png "")
-TPOT
-![图片加载失败](./pic/TPOT.png "")
-TTFT
-![图片加载失败](./pic/TTFT.png "")
 
 ##### 使用方法
 1. 拉取镜像
@@ -118,4 +122,3 @@ vllm serve $MODEL \
 --async-scheduling
 ```
 
-aisbench复现参数: GSM8k数据集 num_prompts=256 batch_size=128 req_rate=8 输入输出长度见图
